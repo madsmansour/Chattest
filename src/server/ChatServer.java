@@ -1,4 +1,6 @@
-package sample;// place this file the path such ends with: ChatServer/server/ChatServer.java
+package server;// place this file the path such ends with: ChatServer/server/ChatServer.java
+
+import client.ClientThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -26,15 +28,17 @@ public class ChatServer{
     }
 
     public void startServer(){
-        clients = new ArrayList<ClientThread>();
-        ServerSocket serverSocket = null;
-        try {
-            serverSocket = new ServerSocket(serverPort);
-            acceptClients(serverSocket);
-        } catch (IOException e){
-            System.err.println("Could not listen on port: "+serverPort);
-            System.exit(1);
-        }
+        new Thread(() -> {
+            clients = new ArrayList<ClientThread>();
+            ServerSocket serverSocket = null;
+            try {
+                serverSocket = new ServerSocket(serverPort);
+                acceptClients(serverSocket);
+            } catch (IOException e) {
+                System.err.println("Could not listen on port: " + serverPort);
+                System.exit(1);
+            }
+            }).start();
     }
 
     private void acceptClients(ServerSocket serverSocket){

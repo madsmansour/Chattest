@@ -1,4 +1,6 @@
-package sample;// place this file the path such ends with: ChatServer/server/ClientThread.java
+package client;// place this file the path such ends with: ChatServer/server/ClientThread.java
+
+import server.ChatServer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
